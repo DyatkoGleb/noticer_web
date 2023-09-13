@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
-import './App.css'; // Путь к файлу стилей
+import NoteList from "./components/NoteList";
+import NoticeList from "./components/NoticeList";
+import './App.css';
 
 
 function App() {
@@ -50,6 +52,11 @@ function App() {
           value="Добавить"
           onClick={addNewNote}
         ></input>
+      </div>
+
+      <div className="d-flex content-center">
+        <NoteList></NoteList>
+        <NoticeList></NoticeList>
       </div>
     </div>
   );
