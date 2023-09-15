@@ -1,39 +1,22 @@
 import React from "react";
-import axios from "axios";
 import NoteList from "./components/NoteList";
 import NoticeList from "./components/NoticeList";
+
+import { sendNote } from "./api";
+
 import './App.css';
 
 
 function App() {
-
   const addNewNote = () => {
     const input = document.getElementById('input')
 
-    if (sendNote()) {
+    if (sendNote(input.value)) {
       input.value = ''
       input.focus()
     }
   }
-
-
-  const sendNote = async () => {
-    const input = document.getElementById('input')
-    const dataToSend = {message: input.value}
-    const headers = {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
-    }
-
-    try {
-      const response = await axios.post('http://localhost:8008/addNewNote', dataToSend, { headers })
-
-      console.log(response.data)
-      return true
-    } catch (err) {
-      return false
-    }
-  }
+  
 
   return (
     <div class="content">

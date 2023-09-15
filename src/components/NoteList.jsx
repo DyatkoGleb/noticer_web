@@ -1,23 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import axios from "axios";
+import React, { useState, useEffect } from 'react'
+import { useFetchNotes } from '../api'
 
 const NoteList = () => {
-    const [notes, setNotes] = useState({});
+    const fetchNotes = useFetchNotes()
+
+    const [notes, setNotes] = useState([])
 
     useEffect(() => {
-        const headers = {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-        }
-
-        axios.get('http://localhost:8008/getNotes', { headers })
-        .then(response => {
-            setNotes(response.data.data);
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
-    }, []);
+        fetchNotes()
+            .then(data => {
+                setNotes(data)
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            })
+    }, [fetchNotes])
 
     return (
         <div>
@@ -32,7 +29,7 @@ const NoteList = () => {
                 )}
             </ul>
         </div>
-    );
+    )
 }
 
 export default NoteList

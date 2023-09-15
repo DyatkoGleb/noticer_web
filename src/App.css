@@ -9,6 +9,9 @@ body, html {
     outline: none;
 }
 
+ul {
+    color: white;
+}
 
 .d-flex {
     display: flex;

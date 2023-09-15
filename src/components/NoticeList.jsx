@@ -1,23 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import axios from "axios";
+import React, { useState, useEffect } from 'react'
+import { useFetchNotices } from '../api'
 
 const NoticeList = () => {
-    const [notices, setNotices] = useState({});
+    const fetchNotices = useFetchNotices()
+
+    const [notices, setNotices] = useState([])
 
     useEffect(() => {
-        const headers = {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-        }
-
-        axios.get('http://localhost:8008/getNotices', { headers })
-        .then(response => {
-            setNotices(response.data.data);
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
-    }, []);
+        fetchNotices()
+            .then(data => {
+                setNotices(data)
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            })
+    }, [fetchNotices])
 
     return (
         <div>
