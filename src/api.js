@@ -36,7 +36,7 @@ export const useFetchNotes = () => {
 export const useFetchNotices = () => {
     const fetchNotices = useMemo(() => async () => {
         try {
-            const response = await axios.get('http://localhost:8008/getNotices', { headers })
+            const response = await axios.get('http://localhost:8008/getAllNotices', { headers })
 
             return response.data.data
         } catch (error) {
