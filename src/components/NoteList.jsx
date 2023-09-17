@@ -20,13 +20,14 @@ const NoteList = () => {
     return (
         <div>
             <h2 className="mt-3 mb-4">Notes</h2>
-                {Array.isArray(notes) && notes.length > 0 ? (
-                    notes.map(note => (
-                        <NoteItem data={note}></NoteItem>
-                    ))
-                ) : (
-                    <div>No notes available</div>
-                )}
+
+            {Array.isArray(notes) && notes.length > 0 ? (
+                notes.map(note => (
+                    <NoteItem data={note}></NoteItem>
+                ))
+            ) : (
+                <div>No notes available</div>
+            )}
         </div>
     )
 }

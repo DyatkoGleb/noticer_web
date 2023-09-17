@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 
+
 const StyledDiv = styled.div`
     margin: 10px 0;
-    padding: 20px 25px;
+    padding: 15px 20px;
     border-radius: 20px;
     background-color: #080808;
     color: #eeeeee;
@@ -13,6 +14,7 @@ const StyledDiv = styled.div`
         box-shadow: 0 0 8px #285134;
     }
 `;
+
 
 const NoteCard = (props) => {
     return (

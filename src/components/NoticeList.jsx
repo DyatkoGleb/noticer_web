@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useFetchNotices } from '../api'
+import NoticeItem from "./NoticeItem";
+
 
 const NoticeList = () => {
     const fetchNotices = useFetchNotices()
@@ -18,18 +20,18 @@ const NoticeList = () => {
 
     return (
         <div>
-            <h2>Notices</h2>
-            <ul>
+            <h2 className="mt-3 mb-4">Notices</h2>
+
             {Array.isArray(notices) && notices.length > 0 ? (
                 notices.map(notice => (
-                <li key={notice.id}>{notice.text} - {notice.datetime}</li>
+                    <NoticeItem data={notice}></NoticeItem>
                 ))
             ) : (
-                <li>No notices available</li>
+                <div>No notices available</div>
             )}
-            </ul>
         </div>
     );
 }
+
 
 export default NoticeList
