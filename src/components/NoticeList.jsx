@@ -1,36 +1,56 @@
 import { useState, useEffect } from 'react'
-import { useFetchNotices } from '../api'
-import NoticeItem from "./NoticeItem";
+import { fetchAllNotices, fetchCurrentNotices } from '../api'
+import NoticeItem from './NoticeItem'
+import styled from 'styled-components'
+
+
+const NoticeSwitcher = styled.div`
+    margin-bottom: 13px;
+    color: #eeeeee;
+    font-size: 24px;
+    cursor: pointer;
+    user-select: none;
+`
 
 
 const NoticeList = () => {
-    const fetchNotices = useFetchNotices()
-
+    const [loadAll, setLoadAll] = useState(false)
     const [notices, setNotices] = useState([])
 
+    const handleLoadButtonClick = (event) => {
+        setLoadAll(!loadAll)
+
+        event.target.textContent = loadAll ? '☐' : '☑'
+    }
+
     useEffect(() => {
-        fetchNotices()
-            .then(data => {
-                setNotices(data)
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            })
-    }, [fetchNotices])
+        const fetchData = async () => {
+            try {
+                const response = await (loadAll ? fetchAllNotices() : fetchCurrentNotices())
+                setNotices(response.data)
+            } catch (error) {
+                console.error('Error fetching data:', error)
+            }
+        }
+
+        fetchData()
+    }, [loadAll])
 
     return (
         <div>
-            <h2 className="mt-3 mb-4">Notices</h2>
-
+            <div className="d-flex justify-content-between align-items-center">
+                <h2 className="mt-3 mb-3">Notices</h2>
+                <NoticeSwitcher onClick={handleLoadButtonClick}>☐</NoticeSwitcher>
+            </div>
             {Array.isArray(notices) && notices.length > 0 ? (
                 notices.map(notice => (
-                    <NoticeItem data={notice}></NoticeItem>
+                    <NoticeItem key={notice.id} data={notice}></NoticeItem>
                 ))
             ) : (
                 <div>No notices available</div>
             )}
         </div>
-    );
+    )
 }
 
 

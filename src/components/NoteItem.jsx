@@ -6,7 +6,7 @@ const NoteItem = (props) => {
 
     return (
         <NoteCard>
-            <div key={note.id}>{note.text}</div>
+            <div>{note.text}</div>
         </NoteCard>
     )
 }

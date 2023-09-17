@@ -2,17 +2,17 @@ import React from 'react'
 import NewNoteForm from './components/NewNoteForm'
 import NoteList from './components/NoteList'
 import NoticeList from './components/NoticeList'
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './custom-bootstrap.css'
-import styled from "styled-components";
+import styled from "styled-components"
 
 
 const ContentContainer = styled.div`
   max-width: 1000px;
   padding: 0 50px;
   margin: 10px auto 0 auto;
-`;
+`
 
 
 function App() {
@@ -29,8 +29,8 @@ function App() {
                   </div>
             </div>
         </ContentContainer>
-    );
+    )
 }
 
 
-export default App;
+export default App

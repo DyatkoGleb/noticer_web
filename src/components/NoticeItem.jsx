@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 
 const StyledDiv = styled.div`
-    margin-bottom: 10px;
+    margin-bottom: 13px;
     color: #6a6a6a;
     font-size: 12px;
 `;
@@ -15,7 +15,7 @@ const NoticeItem = (props) => {
     return (
         <NoteCard>
             <StyledDiv>{notice.datetime}</StyledDiv>
-            <div key={notice.id}>{notice.text}</div>
+            <div>{notice.text}</div>
         </NoteCard>
     )
 }

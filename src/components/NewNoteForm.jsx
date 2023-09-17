@@ -1,4 +1,4 @@
-import { sendNote } from '../api';
+import { sendNote } from '../api'
 
 
 const NewNoteForm = () => {

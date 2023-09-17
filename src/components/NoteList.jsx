@@ -13,17 +13,19 @@ const NoteList = () => {
                 setNotes(data)
             })
             .catch(error => {
-                console.error('Error:', error);
+                console.error('Error:', error)
             })
     }, [fetchNotes])
     
     return (
         <div>
-            <h2 className="mt-3 mb-4">Notes</h2>
+            <div className="row">
+                <h2 className="mt-3 mb-3">Notes</h2>
+            </div>
 
             {Array.isArray(notes) && notes.length > 0 ? (
                 notes.map(note => (
-                    <NoteItem data={note}></NoteItem>
+                    <NoteItem key={note.id} data={note}></NoteItem>
                 ))
             ) : (
                 <div>No notes available</div>

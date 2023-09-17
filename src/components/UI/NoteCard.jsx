@@ -13,7 +13,7 @@ const StyledDiv = styled.div`
     &:hover {
         box-shadow: 0 0 8px #285134;
     }
-`;
+`
 
 
 const NoteCard = (props) => {

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo } from 'react'
 import axios from 'axios'
 
 
@@ -20,7 +20,7 @@ export const sendNote = async (message) => {
 }
 
 export const useFetchNotes = () => {
-    const fetchNotes = useMemo(() => async () => {
+    return useMemo(() => async () => {
         try {
             const response = await axios.get('http://localhost:8008/getNotes', { headers })
 
@@ -29,20 +29,24 @@ export const useFetchNotes = () => {
             throw error
         }
     }, [])
-
-    return fetchNotes
 }
 
-export const useFetchNotices = () => {
-    const fetchNotices = useMemo(() => async () => {
-        try {
-            const response = await axios.get('http://localhost:8008/getAllNotices', { headers })
+export const fetchAllNotices = async () => {
+    try {
+        const response = await axios.get('http://localhost:8008/getAllNotices', { headers })
+        return response.data
+    } catch (error) {
+        console.error('Error fetching all notices:', error)
+        throw error
+    }
+}
 
-            return response.data.data
-        } catch (error) {
-            throw error
-        }
-    }, [])
-
-    return fetchNotices
+export const fetchCurrentNotices = async () => {
+    try {
+        const response = await axios.get('http://localhost:8008/getCurrentNotices', { headers })
+        return response.data
+    } catch (error) {
+        console.error('Error fetching current notices:', error)
+        throw error
+    }
 }
