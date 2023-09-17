@@ -4,7 +4,7 @@ const StyledDiv = styled.div`
     margin: 10px 0;
     padding: 20px 25px;
     border-radius: 20px;
-    background-color: #000;
+    background-color: #080808;
     color: #eeeeee;
     cursor: pointer;
     transition: .1s;

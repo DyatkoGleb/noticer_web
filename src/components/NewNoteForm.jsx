@@ -1,4 +1,3 @@
-import React from "react"
 import { sendNote } from '../api';
 
 
@@ -14,16 +13,16 @@ const NewNoteForm = () => {
 
     return (
         <div className="content">
-            <div className="d-flex content-center align-center" id="form">
+            <div className="d-flex justify-content-center align-items-center" id="form">
                 <input 
-					className="input" 
+					className="add-note-input"
 					id="input" 
 					type="text" 
 					placeholder="24.01.2023 11:11 Text.." 
 					autoFocus
                 ></input>
                 <input 
-					className="btn" 
+					className="add-note-btn"
 					id="btn-add" 
 					type="button" 
 					value="Добавить"
