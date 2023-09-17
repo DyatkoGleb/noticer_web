@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useFetchNotes } from '../api'
+import NoteItem from './NoteItem'
 
 const NoteList = () => {
     const fetchNotes = useFetchNotes()
@@ -15,19 +16,17 @@ const NoteList = () => {
                 console.error('Error:', error);
             })
     }, [fetchNotes])
-
+    
     return (
         <div>
             <h2>Notes</h2>
-            <ul>
                 {Array.isArray(notes) && notes.length > 0 ? (
                     notes.map(note => (
-                    <li key={note.id}>{note.text}</li>
+                        <NoteItem data={note}></NoteItem>
                     ))
                 ) : (
-                    <li>No notes available</li>
+                    <div>No notes available</div>
                 )}
-            </ul>
         </div>
     )
 }
