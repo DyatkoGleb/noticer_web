@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 const NoticeSwitcher = styled.div`
     margin-bottom: 13px;
-    color: #eeeeee;
+    color: #6a6a6a;
     font-size: 24px;
     cursor: pointer;
     user-select: none;
@@ -20,7 +20,7 @@ const NoticeList = () => {
     const handleLoadButtonClick = (event) => {
         setLoadAll(!loadAll)
 
-        event.target.textContent = loadAll ? '☐' : '☑'
+        event.target.textContent = loadAll ? 'V' : 'O'
     }
 
     useEffect(() => {
@@ -40,7 +40,7 @@ const NoticeList = () => {
         <div>
             <div className="d-flex justify-content-between align-items-center">
                 <h2 className="mt-3 mb-3">Notices</h2>
-                <NoticeSwitcher onClick={handleLoadButtonClick}>☐</NoticeSwitcher>
+                <NoticeSwitcher onClick={handleLoadButtonClick}>V</NoticeSwitcher>
             </div>
             {Array.isArray(notices) && notices.length > 0 ? (
                 notices.map(notice => (
