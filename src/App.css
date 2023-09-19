@@ -12,36 +12,6 @@ p {
     line-height: 19px;
 }
 
-.add-note-btn {
-    margin: 15px;
-    padding: 10px 15px;
-    background: none;
-    background-color: #080808;
-    border: none;
-    border-radius: 20px;
-    color: #6a6a6a;
-    cursor: pointer;
-    transition: .1s;
-}
-.add-note-btn:hover, .add-note-btn:focus, .add-note-btn:active {
-    color: #7effa5;
-    box-shadow: 0 0 8px #285134;
-}
-
-.add-note-input {
-    padding: 10px;
-    height: max-content;
-    background: none;
-    border: none;
-    color: white;
-    transition: .1s;
-}
-.add-note-input:hover, .add-note-input:focus, .add-note-input:active {
-    background-color: #080808;
-    box-shadow: 0 0 8px #285134;
-    border-radius: 20px;
-}
-
 ::-webkit-scrollbar {
     background: #161616;
     width: 8px;

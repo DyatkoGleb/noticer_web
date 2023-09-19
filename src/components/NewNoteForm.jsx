@@ -1,32 +1,35 @@
+import { useState, useRef } from 'react'
 import { sendNote } from '../api'
+import FadedText from './UI/FadedText'
+import Button from './UI/Button'
+import Input from './UI/Input'
 
 
 const NewNoteForm = () => {
-    const addNewNote = () => {
-		const input = document.getElementById('input')
-	
-		if (sendNote(input.value)) {
-			input.value = ''
-			input.focus()
+	const [inputValue, setInputValue] = useState('')
+	const inputRef = useRef(null);
+
+	const handleInputChange = (value) => {
+		setInputValue(value)
+		console.log(inputValue)
+	}
+
+	const addNewNote = () => {
+		if (sendNote(inputValue)) {
+			setInputValue('')
+			inputRef.current.focus()
 		}
-    }
+	}
 
     return (
 		<div className="d-flex justify-content-center align-items-center" id="form">
-			<input
-				className="add-note-input"
-				id="input"
-				type="text"
-				placeholder="24.01.2023 11:11 Text.."
-				autoFocus
-			></input>
-			<input
-				className="add-note-btn"
-				id="btn-add"
-				type="button"
-				value="Добавить"
-				onClick={addNewNote}
-			></input>
+			<Input
+				inputValue={inputValue}
+				onInputChange={handleInputChange}
+				inputRef={inputRef} />
+			<Button onClick={addNewNote}>
+				<FadedText>Добавить</FadedText>
+			</Button>
 		</div>
     )
 }
