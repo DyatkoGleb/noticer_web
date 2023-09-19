@@ -1,8 +1,15 @@
+body {
+    overflow: hidden;
+}
 * {
     outline: none;
     font-size: 14px;
     line-height: 14px;
     font-family: 'Montserrat', sans-serif;
+}
+
+p {
+    line-height: 19px;
 }
 
 .add-note-btn {
@@ -33,4 +40,13 @@
     background-color: #080808;
     box-shadow: 0 0 8px #285134;
     border-radius: 20px;
+}
+
+::-webkit-scrollbar {
+    background: #161616;
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(100deg, #7effa5, #7eabff);
+    border-radius: 8px;
 }
