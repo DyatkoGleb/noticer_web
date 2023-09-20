@@ -23,6 +23,7 @@ const BtnAboutProject = styled.button`
     line-height: 50px;
     color: #ffffff;
     cursor: pointer;
+    transition: .1s;
 
     &:hover, &:focus {
         color: #7effa5;

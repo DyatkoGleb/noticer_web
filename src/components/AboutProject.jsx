@@ -62,7 +62,7 @@ const AboutProject = ({ show }) => {
                     </AccentText>
                     &nbsp;- фронт сего приложения (вы находитесь здесь), написан на голом реакте.
                 </p>
-                <ProjectToolbox href="https://github.com/DyatkoGleb/noticer_web" target="_blank" tabindex="-1">
+                <ProjectToolbox href="https://github.com/DyatkoGleb/noticer_web" target="_blank" tabIndex="-1">
                     <GithubIcon></GithubIcon>
                     <FadedBlock>React</FadedBlock>
                 </ProjectToolbox>
@@ -76,7 +76,7 @@ const AboutProject = ({ show }) => {
                     &nbsp;- api принимающая и сохраняющая заметки, тудушки и напоминалки из NoticerRequestBot и NoticerWeb,
                     отдаёт на фронт спски оных, имеет ручки для удаления и изменения.
                 </p>
-                <ProjectToolbox href="https://github.com/DyatkoGleb/noticer_api" target="_blank" tabindex="-1">
+                <ProjectToolbox href="https://github.com/DyatkoGleb/noticer_api" target="_blank" tabIndex="-1">
                     <GithubIcon></GithubIcon>
                     <FadedBlock>Python, FastAPI, SQLAlchemy, MySQL</FadedBlock>
                 </ProjectToolbox>
@@ -89,7 +89,7 @@ const AboutProject = ({ show }) => {
                     </AccentText>
                     &nbsp;- сервис, запрашивающий раз в день список напоминалок на день и шлющий их в указанное время в NoticerBot для последующией отправки в tg.
                 </p>
-                <ProjectToolbox href="https://github.com/DyatkoGleb/noticer_queue" target="_blank" tabindex="-1">
+                <ProjectToolbox href="https://github.com/DyatkoGleb/noticer_queue" target="_blank" tabIndex="-1">
                     <GithubIcon></GithubIcon>
                     <FadedBlock>Python, Сelery, Redis</FadedBlock>
                 </ProjectToolbox>
@@ -103,7 +103,7 @@ const AboutProject = ({ show }) => {
                     &nbsp;- телеграм бот, принимающий данные для заметок, тудушек, напоминашек и напоминалок их в NoticerApi.
                     Так же отправляет сообщения из NoticerQueue.
                 </p>
-                <ProjectToolbox href="https://github.com/DyatkoGleb/noticer_bot" target="_blank" tabindex="-1">
+                <ProjectToolbox href="https://github.com/DyatkoGleb/noticer_bot" target="_blank" tabIndex="-1">
                     <GithubIcon></GithubIcon>
                     <FadedBlock>Python, Pyrogram</FadedBlock>
                 </ProjectToolbox>
@@ -116,7 +116,7 @@ const AboutProject = ({ show }) => {
                     </AccentText>
                     &nbsp;- в него обёрнуто всё вышеперечисленное.
                 </p>
-                <ProjectToolbox href="https://github.com/DyatkoGleb/noticer_kubernetes" target="_blank" tabindex="-1">
+                <ProjectToolbox href="https://github.com/DyatkoGleb/noticer_kubernetes" target="_blank" tabIndex="-1">
                     <GithubIcon></GithubIcon>
                     <FadedBlock>Kubernetes</FadedBlock>
                 </ProjectToolbox>

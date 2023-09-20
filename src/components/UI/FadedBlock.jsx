@@ -1,4 +1,4 @@
-import FadedText from "./FadedText";
+import FadedText from './FadedText'
 
 
 const FadedBlock = (props) => {

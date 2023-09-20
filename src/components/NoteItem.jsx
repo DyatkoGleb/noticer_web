@@ -1,4 +1,4 @@
-import NoteCard from "./UI/NoteCard"
+    import NoteCard from './UI/NoteCard'
 
 
 const NoteItem = (props) => {
