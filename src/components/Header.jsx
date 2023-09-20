@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import ContentWrapper from './UI/ContentWrapper'
+import AboutProject from './AboutProject'
 import styled from 'styled-components'
-import AboutProject from "./AboutProject";
 
 
 const HeaderBlock = styled.div`

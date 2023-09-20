@@ -4,9 +4,7 @@ import ContentWrapper from './components/UI/ContentWrapper'
 import NewNoteForm from './components/NewNoteForm'
 import NoteList from './components/NoteList'
 import NoticeList from './components/NoticeList'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './custom-bootstrap.css'
-import './App.css'
+import './assets/scss/style.scss'
 
 
 function App() {
