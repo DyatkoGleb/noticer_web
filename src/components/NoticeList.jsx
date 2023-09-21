@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react'
 import { fetchAllNotices, fetchCurrentNotices } from '../api'
 import NoticeItem from './NoticeItem'
 import styled from 'styled-components'
+import IconChecked from './UI/IconChecked'
+import IconUnchecked from './UI/IconUnchecked'
 
 
 const NoticeSwitcher = styled.div`
-    margin-bottom: 13px;
     color: #6a6a6a;
     font-size: 24px;
     cursor: pointer;
@@ -19,8 +20,6 @@ const NoticeList = () => {
 
     const handleLoadButtonClick = (event) => {
         setLoadAll(!loadAll)
-
-        event.target.textContent = loadAll ? 'V' : 'O'
     }
 
     useEffect(() => {
@@ -40,7 +39,13 @@ const NoticeList = () => {
         <div>
             <div className="d-flex justify-content-between align-items-center">
                 <h2 className="mt-3 mb-3">Notices</h2>
-                <NoticeSwitcher onClick={handleLoadButtonClick}>V</NoticeSwitcher>
+                <NoticeSwitcher onClick={handleLoadButtonClick}>
+                    {loadAll ? (
+                        <IconChecked/>
+                    ) : (
+                        <IconUnchecked/>
+                    )}
+                </NoticeSwitcher>
             </div>
             {Array.isArray(notices) && notices.length > 0 ? (
                 notices.map(notice => (
