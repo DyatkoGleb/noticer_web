@@ -1,10 +1,10 @@
 import FadedText from './FadedText'
 
 
-const FadedBlock = (props) => {
+const FadedBlock = ({children}) => {
     return (
         <div>
-            <FadedText>{props.children}</FadedText>
+            <FadedText>{children}</FadedText>
         </div>
     )
 }

@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from 'styled-components'
 
 
@@ -17,20 +18,17 @@ const StyledInput = styled.input`
 `
 
 
-const Input = ({ children, inputValue, onInputChange, inputRef }) => {
+const Input = React.forwardRef((props, ref) => {
     return (
         <StyledInput
             type="text"
             placeholder="24.01.2023 11:11 Text.."
             autoFocus
-            ref={inputRef}
-            value={inputValue}
-            onChange={(event) => onInputChange(event.target.value)}
-        >
-            {children}
-        </StyledInput>
+            ref={ref}
+            {...props}
+        />
     )
-}
+})
 
 
 export default Input

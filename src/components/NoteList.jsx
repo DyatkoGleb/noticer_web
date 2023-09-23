@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useFetchNotes } from '../api'
 import NoteItem from './NoteItem'
 
+
 const NoteList = () => {
     const fetchNotes = useFetchNotes()
 
@@ -23,7 +24,7 @@ const NoteList = () => {
                 <h2 className="mt-3 mb-3">Notes</h2>
             </div>
 
-            {Array.isArray(notes) && notes.length > 0 ? (
+            {notes.length ? (
                 notes.map(note => (
                     <NoteItem key={note.id} data={note}></NoteItem>
                 ))
@@ -33,5 +34,6 @@ const NoteList = () => {
         </div>
     )
 }
+
 
 export default NoteList

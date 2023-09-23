@@ -34,7 +34,7 @@ const GithubIcon = styled.div`
     min-width: 14px;
     min-height: 14px;
     margin-right: 6px;
-    background-image: url("https://github.githubassets.com/favicons/favicon-dark.png");
+    background-image: url('https://github.githubassets.com/favicons/favicon-dark.png');
     background-repeat: no-repeat;
     background-size: 100%;
 `

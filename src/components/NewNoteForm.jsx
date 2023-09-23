@@ -9,11 +9,6 @@ const NewNoteForm = () => {
 	const [inputValue, setInputValue] = useState('')
 	const inputRef = useRef(null);
 
-	const handleInputChange = (value) => {
-		setInputValue(value)
-		console.log(inputValue)
-	}
-
 	const addNewNote = () => {
 		if (sendNote(inputValue)) {
 			setInputValue('')
@@ -24,9 +19,10 @@ const NewNoteForm = () => {
     return (
 		<div className="d-flex justify-content-center align-items-center" id="form">
 			<Input
-				inputValue={inputValue}
-				onInputChange={handleInputChange}
-				inputRef={inputRef} />
+				value={inputValue}
+				onChange={e => setInputValue(e.target.value)}
+				ref={inputRef}
+			/>
 			<Button onClick={addNewNote}>
 				<FadedText>Добавить</FadedText>
 			</Button>

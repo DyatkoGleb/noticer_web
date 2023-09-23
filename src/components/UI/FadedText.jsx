@@ -6,10 +6,10 @@ const FadedTextS = styled.span`
 `
 
 
-const FadedBlock = (props) => {
+const FadedBlock = ({children}) => {
     return (
         <div>
-            <FadedTextS>{props.children}</FadedTextS>
+            <FadedTextS>{children}</FadedTextS>
         </div>
     )
 }

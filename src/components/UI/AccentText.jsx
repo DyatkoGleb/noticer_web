@@ -6,9 +6,9 @@ const AccentTextS = styled.span`
 `
 
 
-const AccentText = (props) => {
+const AccentText = ({children}) => {
     return (
-        <AccentTextS>{props.children}</AccentTextS>
+        <AccentTextS>{children}</AccentTextS>
     )
 }
 

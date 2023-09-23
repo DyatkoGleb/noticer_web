@@ -16,10 +16,10 @@ const StyledDiv = styled.div`
 `
 
 
-const NoteCard = (props) => {
+const NoteCard = ({children}) => {
     return (
         <StyledDiv>
-            {props.children}
+            {children}
         </StyledDiv>
     )
 }

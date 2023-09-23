@@ -8,10 +8,10 @@ const ContentContainer = styled.div`
 `
 
 
-const ContentWrapper = (props) => {
+const ContentWrapper = ({children}) => {
     return (
         <ContentContainer>
-            {props.children}
+            {children}
         </ContentContainer>
     )
 }

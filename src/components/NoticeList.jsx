@@ -47,7 +47,8 @@ const NoticeList = () => {
                     )}
                 </NoticeSwitcher>
             </div>
-            {Array.isArray(notices) && notices.length > 0 ? (
+
+            {notices.length ? (
                 notices.map(notice => (
                     <NoticeItem key={notice.id} data={notice}></NoticeItem>
                 ))
