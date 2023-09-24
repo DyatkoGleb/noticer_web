@@ -7,7 +7,7 @@ import Input from './UI/Input'
 
 const NewNoteForm = () => {
 	const [inputValue, setInputValue] = useState('')
-	const inputRef = useRef(null);
+	const inputRef = useRef(null)
 
 	const addNewNote = () => {
 		if (sendNote(inputValue)) {

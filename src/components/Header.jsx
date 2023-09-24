@@ -32,7 +32,7 @@ const BtnAboutProject = styled.button`
 
 
 const Header = () => {
-    const [showAboutProject, setShowAboutProject] = useState(false);
+    const [showAboutProject, setShowAboutProject] = useState(false)
 
     const togglePopup = (event) => {
         setShowAboutProject(!showAboutProject);

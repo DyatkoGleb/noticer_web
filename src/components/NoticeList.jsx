@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-import { fetchAllNotices, fetchCurrentNotices } from '../api'
 import NoticeItem from './NoticeItem'
 import styled from 'styled-components'
 import IconChecked from './UI/IconChecked'
@@ -14,33 +12,23 @@ const NoticeSwitcher = styled.div`
 `
 
 
-const NoticeList = () => {
-    const [loadAll, setLoadAll] = useState(false)
-    const [notices, setNotices] = useState([])
-
-    const handleLoadButtonClick = (event) => {
-        setLoadAll(!loadAll)
+const NoticeList = ({notices, isLoadAllNotices, setIsLoadAllNotices}) => {
+    if (!notices.length) {
+        return (
+            <div>No notes available</div>
+        )
     }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await (loadAll ? fetchAllNotices() : fetchCurrentNotices())
-                setNotices(response.data)
-            } catch (error) {
-                console.error('Error fetching data:', error)
-            }
-        }
-
-        fetchData()
-    }, [loadAll])
+    const handleLoadButtonClick = () => {
+        setIsLoadAllNotices(!isLoadAllNotices)
+    }
 
     return (
         <div>
             <div className="d-flex justify-content-between align-items-center">
                 <h2 className="mt-3 mb-3">Notices</h2>
                 <NoticeSwitcher onClick={handleLoadButtonClick}>
-                    {loadAll ? (
+                    {isLoadAllNotices ? (
                         <IconChecked/>
                     ) : (
                         <IconUnchecked/>
@@ -48,13 +36,9 @@ const NoticeList = () => {
                 </NoticeSwitcher>
             </div>
 
-            {notices.length ? (
-                notices.map(notice => (
-                    <NoticeItem key={notice.id} data={notice}></NoticeItem>
-                ))
-            ) : (
-                <div>No notices available</div>
-            )}
+            {notices.map(notice => (
+                <NoticeItem key={notice.id} data={notice} />
+            ))}
         </div>
     )
 }
