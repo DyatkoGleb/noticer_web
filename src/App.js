@@ -5,26 +5,21 @@ import NewNoteForm from './components/NewNoteForm'
 import NoteList from './components/NoteList'
 import NoticeList from './components/NoticeList'
 import './assets/scss/style.scss'
-import {fetchAllNotices, fetchCurrentNotices, useFetchNotes} from './api'
+import {fetchAllNotices, fetchCurrentNotices, fetchNotes} from './api'
+import {useFetching} from './hooks/useFetching'
 
 
 function App() {
-    const fetchNotes = useFetchNotes()
-
     const [notes, setNotes] = useState([])
     const [notices, setNotices] = useState([])
     const [isLoadAllNotices, setIsLoadAllNotices] = useState(false)
 
-    useEffect(() => {
-        fetchNotes()
-            .then(data => {
-                setNotes(data)
-            })
-            .catch(error => {
-                console.error('Error:', error)
-            })
-    }, [fetchNotes])
+    const [fetching] = useFetching(async () => {
+        const notes = await fetchNotes()
+        setNotes(notes.data)
+    })
 
+    useEffect(() =>  fetching(), [])
 
     useEffect(() => {
         const fetchData = async () => {

@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import axios from 'axios'
 
 
@@ -19,16 +18,10 @@ export const sendNote = async (message) => {
     }
 }
 
-export const useFetchNotes = () => {
-    return useMemo(() => async () => {
-        try {
-            const response = await axios.get('http://localhost:8008/getNotes', { headers })
+export const fetchNotes = async () => {
+    const response = await axios.get('http://localhost:8008/getNotes', { headers })
 
-            return response.data.data
-        } catch (error) {
-            throw error
-        }
-    }, [])
+    return response.data
 }
 
 export const fetchAllNotices = async () => {
