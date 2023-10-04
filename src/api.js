@@ -25,21 +25,13 @@ export const fetchNotes = async () => {
 }
 
 export const fetchAllNotices = async () => {
-    try {
-        const response = await axios.get('http://localhost:8008/getAllNotices', { headers })
-        return response.data
-    } catch (error) {
-        console.error('Error fetching all notices:', error)
-        throw error
-    }
+    const response = await axios.get('http://localhost:8008/getAllNotices', { headers })
+
+    return response.data
 }
 
 export const fetchCurrentNotices = async () => {
-    try {
-        const response = await axios.get('http://localhost:8008/getCurrentNotices', { headers })
-        return response.data
-    } catch (error) {
-        console.error('Error fetching current notices:', error)
-        throw error
-    }
+    const response = await axios.get('http://localhost:8008/getCurrentNotices', { headers })
+
+    return response.data
 }
