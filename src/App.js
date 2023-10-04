@@ -14,25 +14,18 @@ function App() {
     const [notices, setNotices] = useState([])
     const [isLoadAllNotices, setIsLoadAllNotices] = useState(false)
 
-    const [fetching] = useFetching(async () => {
+    const [notesFetching] = useFetching(async () => {
         const notes = await fetchNotes()
         setNotes(notes.data)
     })
 
-    useEffect(() =>  fetching(), [])
+    const [noticesFetching] = useFetching(async () => {
+        const notices = await (isLoadAllNotices ? fetchAllNotices() : fetchCurrentNotices())
+        setNotices(notices.data)
+    })
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await (isLoadAllNotices ? fetchAllNotices() : fetchCurrentNotices())
-                setNotices(response.data)
-            } catch (error) {
-                console.error('Error fetching data:', error)
-            }
-        }
-
-        fetchData()
-    }, [isLoadAllNotices])
+    useEffect(() =>  notesFetching(), [])
+    useEffect(() =>  noticesFetching(), [isLoadAllNotices])
 
     return (
         <div>
