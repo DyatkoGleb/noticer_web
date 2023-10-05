@@ -24,8 +24,8 @@ function App() {
         setNotices(notices.data)
     })
 
-    useEffect(() =>  notesFetching(), [])
-    useEffect(() =>  noticesFetching(), [isLoadAllNotices])
+    useEffect( () => { notesFetching() }, [])
+    useEffect(() => { noticesFetching() }, [isLoadAllNotices])
 
     return (
         <div>
