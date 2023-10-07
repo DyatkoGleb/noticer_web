@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { sendNote } from '../api'
+import NoteService from '../api/NoteService'
 import FadedText from './UI/FadedText'
 import Button from './UI/Button'
 import Input from './UI/Input'
@@ -10,7 +10,7 @@ const NewNoteForm = () => {
 	const inputRef = useRef(null)
 
 	const addNewNote = () => {
-		if (sendNote(inputValue)) {
+		if (NoteService.sendNote(inputValue)) {
 			setInputValue('')
 			inputRef.current.focus()
 		}

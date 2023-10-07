@@ -5,7 +5,7 @@ import NewNoteForm from './components/NewNoteForm'
 import NoteList from './components/NoteList'
 import NoticeList from './components/NoticeList'
 import './assets/scss/style.scss'
-import {fetchAllNotices, fetchCurrentNotices, fetchNotes} from './api'
+import NoteService from './api/NoteService'
 import {useFetching} from './hooks/useFetching'
 
 
@@ -14,18 +14,18 @@ function App() {
     const [notices, setNotices] = useState([])
     const [isLoadAllNotices, setIsLoadAllNotices] = useState(false)
 
-    const [notesFetching] = useFetching(async () => {
-        const notes = await fetchNotes()
-        setNotes(notes.data)
+    const [fetchNotes] = useFetching(async () => {
+        const notes = await NoteService.fetchNotes()
+        setNotes(notes.data.data)
     })
 
-    const [noticesFetching] = useFetching(async () => {
-        const notices = await (isLoadAllNotices ? fetchAllNotices() : fetchCurrentNotices())
-        setNotices(notices.data)
+    const [fetchNotices] = useFetching(async () => {
+        const notices = await (isLoadAllNotices ? NoteService.fetchAllNotices() : NoteService.fetchCurrentNotices())
+        setNotices(notices.data.data)
     })
 
-    useEffect( () => { notesFetching() }, [])
-    useEffect(() => { noticesFetching() }, [isLoadAllNotices])
+    useEffect( () => { fetchNotes() }, [])
+    useEffect(() => { fetchNotices() }, [isLoadAllNotices])
 
     return (
         <div>
