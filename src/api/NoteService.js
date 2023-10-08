@@ -20,11 +20,11 @@ export default class NoteService
     }
 
     static fetchNotes = async () => {
-        return await axios.get('http://localhost:8008/getNotes', { headers: this.headers })
+        return await axios.get('http://localhost:8008/getNote', { headers: this.headers })
     }
 
     static fetchAllNotices = async () => {
-        return await axios.get('http://localhost:8008/getAllNotices', { headers: this.headers })
+        return await axios.get('http://localhost:8008/getAlNotices', { headers: this.headers })
     }
 
     static fetchCurrentNotices = async () => {

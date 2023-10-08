@@ -7,25 +7,47 @@ import NoticeList from './components/NoticeList'
 import './assets/scss/style.scss'
 import NoteService from './api/NoteService'
 import {useFetching} from './hooks/useFetching'
+import ErrorList from './components/ErrorList'
 
 
 function App() {
     const [notes, setNotes] = useState([])
     const [notices, setNotices] = useState([])
     const [isLoadAllNotices, setIsLoadAllNotices] = useState(false)
+    const [errors, setError] = useState([])
 
-    const [fetchNotes] = useFetching(async () => {
+    const [fetchNotes, isNotesLoading, noteError, setNoteError] = useFetching(async () => {
         const notes = await NoteService.fetchNotes()
         setNotes(notes.data.data)
     })
 
-    const [fetchNotices] = useFetching(async () => {
+    const [fetchNotices, isNoticesLoading, noticeError, setNoticeError] = useFetching(async () => {
         const notices = await (isLoadAllNotices ? NoteService.fetchAllNotices() : NoteService.fetchCurrentNotices())
         setNotices(notices.data.data)
     })
 
     useEffect( () => { fetchNotes() }, [])
     useEffect(() => { fetchNotices() }, [isLoadAllNotices])
+    useEffect( () => { addError(noteError, 'notes') }, [noteError])
+    useEffect( () => { addError(noticeError, 'notices') }, [noticeError])
+
+    const addError = (textError, where) => {
+        if (!textError) return
+
+        const newError = {
+            id: Math.floor(Date.now() / 1000) + Math.floor(Math.random() * 99999) + 1,
+            message: `Error load ${where}: ` + textError
+        }
+
+        setError(errors.length ? [newError, ...errors] : textError ? [newError] : [])
+        setNoteError(null)
+        setNoticeError(null)
+    }
+
+    const removeError = (errorId) => {
+        const updatedItems = errors.filter(error => error.id !== errorId)
+        setError(updatedItems)
+    }
 
     return (
         <div>
@@ -43,6 +65,8 @@ function App() {
                     </div>
                 </div>
             </ContentWrapper>
+
+            <ErrorList errors={errors} removeError={removeError}/>
         </div>
     )
 }
