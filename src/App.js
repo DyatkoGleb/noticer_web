@@ -35,13 +35,12 @@ function App() {
         if (!textError) return
 
         const newError = {
-            id: Math.floor(Date.now() / 1000) + Math.floor(Math.random() * 99999) + 1,
+            id: where + '_' + Math.floor(Date.now()),
             message: `Error load ${where}: ` + textError
         }
 
         setError(errors.length ? [newError, ...errors] : textError ? [newError] : [])
-        setNoteError(null)
-        setNoticeError(null)
+        where === 'notes' ? setNoteError(null) : setNoticeError(null)
     }
 
     const removeError = (errorId) => {
