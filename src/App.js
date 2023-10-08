@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react'
 import Header from './components/Header'
 import ContentWrapper from './components/UI/ContentWrapper'
 import NewNoteForm from './components/NewNoteForm'
-import NoteList from './components/NoteList'
-import NoticeList from './components/NoticeList'
 import './assets/scss/style.scss'
 import NoteService from './api/NoteService'
 import {useFetching} from './hooks/useFetching'
 import ErrorList from './components/ErrorList'
+import NoteListWrapper from './components/NoteListWrapper'
+import NoticeListWrapper from './components/NoticeListWrapper'
 
 
 function App() {
@@ -58,10 +58,15 @@ function App() {
 
                 <div className="row">
                     <div className="col-12 col-md-6">
-                        <NoteList notes={notes} />
+                        <NoteListWrapper isNotesLoading={isNotesLoading} notes={notes} />
                     </div>
                     <div className="col-12 col-md-6">
-                        <NoticeList notices={notices} isLoadAllNotices={isLoadAllNotices} setIsLoadAllNotices={setIsLoadAllNotices} />
+                        <NoticeListWrapper
+                            isNoticesLoading={isNoticesLoading}
+                            notices={notices}
+                            isLoadAllNotices={isLoadAllNotices}
+                            setIsLoadAllNotices={setIsLoadAllNotices}
+                        />
                     </div>
                 </div>
             </ContentWrapper>
