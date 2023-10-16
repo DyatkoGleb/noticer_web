@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import Header from './components/Header'
 import ContentWrapper from './components/UI/ContentWrapper'
 import NewNoteForm from './components/NewNoteForm'
@@ -15,6 +15,8 @@ function App() {
     const [notices, setNotices] = useState([])
     const [isLoadAllNotices, setIsLoadAllNotices] = useState(false)
     const [errors, setError] = useState([])
+    const [inputValue, setInputValue] = useState('')
+    const inputRef = useRef(null)
 
     const [fetchNotes, isNotesLoading, noteError, setNoteError] = useFetching(async () => {
         const notes = await NoteService.fetchNotes()
@@ -25,6 +27,13 @@ function App() {
         const notices = await (isLoadAllNotices ? NoteService.fetchAllNotices() : NoteService.fetchCurrentNotices())
         setNotices(notices.data.data)
     })
+
+    const addNewNote = () => {
+        if (NoteService.sendNote(inputValue)) {
+            setInputValue('')
+            inputRef.current.focus()
+        }
+    }
 
     useEffect( () => { fetchNotes() }, [])
     useEffect(() => { fetchNotices() }, [isLoadAllNotices])
@@ -53,7 +62,12 @@ function App() {
             <Header />
 
             <ContentWrapper>
-                <NewNoteForm />
+                <NewNoteForm
+                    inputValue={inputValue}
+                    setInputValue={setInputValue}
+                    inputRef={inputRef}
+                    addNewNote={addNewNote}
+                />
 
                 <div className="row">
                     <div className="col-12 col-md-6">
