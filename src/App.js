@@ -30,11 +30,19 @@ function App() {
     })
 
     const [addNote, isNoteMutating, mutatingNoteError, setAddingNoteError] = useDataMutation(async () => {
-        const notes = await NoteService.addNote(inputValue)
+        const response = await NoteService.addNote(inputValue)
 
-        if (notes) {
+        if (response.data) {
             setInputValue('')
             inputRef.current.focus()
+
+            const entity = response.data.data
+
+            if (entity.item_type === 'note') {
+                setNotes([...notes, entity])
+            } else if (entity.item_type === 'notice') {
+                setNotices([...notices, entity])
+            }
         }
     })
 
