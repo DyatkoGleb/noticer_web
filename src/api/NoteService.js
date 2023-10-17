@@ -8,15 +8,8 @@ export default class NoteService
     }
 
 
-    static sendNote = async (message) => {
-        const dataToSend = { message }
-
-        try {
-            await axios.post('http://localhost:8008/addNewNote', dataToSend, { headers: this.headers })
-            return true
-        } catch (error) {
-            throw error
-        }
+    static addNote = async (message) => {
+        return await axios.post('http://localhost:8008/addNewNote', { message }, { headers: this.headers })
     }
 
     static fetchNotes = async () => {

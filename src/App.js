@@ -8,6 +8,7 @@ import {useFetching} from './hooks/useFetching'
 import ErrorList from './components/ErrorList'
 import NoteListWrapper from './components/NoteListWrapper'
 import NoticeListWrapper from './components/NoticeListWrapper'
+import {useDataMutation} from './hooks/useDataMutation'
 
 
 function App() {
@@ -28,17 +29,24 @@ function App() {
         setNotices(notices.data.data)
     })
 
-    const addNewNote = () => {
-        if (NoteService.sendNote(inputValue)) {
+    const [addNote, isNoteMutating, mutatingNoteError, setAddingNoteError] = useDataMutation(async () => {
+        const notes = await NoteService.addNote(inputValue)
+
+        if (notes) {
             setInputValue('')
             inputRef.current.focus()
         }
+    })
+
+    const addNewNote = () => {
+        addNote(inputValue)
     }
 
-    useEffect( () => { fetchNotes() }, [])
+    useEffect(() => { fetchNotes() }, [])
     useEffect(() => { fetchNotices() }, [isLoadAllNotices])
-    useEffect( () => { addError(noteError, 'notes') }, [noteError])
-    useEffect( () => { addError(noticeError, 'notices') }, [noticeError])
+    useEffect(() => { addError(noteError, 'notes') }, [noteError])
+    useEffect(() => { addError(noticeError, 'notices') }, [noticeError])
+    useEffect(() => { addError(mutatingNoteError, 'addNote') }, [mutatingNoteError])
 
     const addError = (textError, where) => {
         if (!textError) return
@@ -49,7 +57,18 @@ function App() {
         }
 
         setError(errors.length ? [newError, ...errors] : textError ? [newError] : [])
-        where === 'notes' ? setNoteError(null) : setNoticeError(null)
+
+        switch (where) {
+            case 'notes':
+                setNoteError(null)
+                break
+            case 'notices':
+                setNoticeError(null)
+                break
+            case 'addNote':
+                setAddingNoteError(null)
+                break
+        }
     }
 
     const removeError = (errorId) => {
