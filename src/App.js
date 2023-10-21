@@ -15,7 +15,7 @@ function App() {
     const [notes, setNotes] = useState([])
     const [notices, setNotices] = useState([])
     const [isLoadAllNotices, setIsLoadAllNotices] = useState(false)
-    const [errors, setError] = useState([])
+    const [errors, setErrors] = useState([])
     const [inputValue, setInputValue] = useState('')
     const inputRef = useRef(null)
 
@@ -46,8 +46,43 @@ function App() {
         }
     })
 
+    const errorHandlers = {
+        notes: setNoteError,
+        notices: setNoticeError,
+        addNote: setAddingNoteError
+    }
+
     const addNewNote = () => {
         addNote(inputValue)
+    }
+
+    const addError = (textError, where) => {
+        if (!textError) return
+
+        const newError = {
+            id: where + '_' + Date.now().toString(36) + Math.random().toString(36),
+            message: `Error load ${where}: ${textError}`
+        }
+
+        setErrors(prevErrors => [newError, ...prevErrors])
+
+        clearHookError(where)
+        removeErrorWithDelay(newError.id)
+    }
+
+    const clearHookError = (where) => {
+        errorHandlers[where](null)
+    }
+
+    const removeErrorWithDelay = (errorId) => {
+        setTimeout(() => {
+            setErrors(prevErrors => prevErrors.filter(error => error.id !== errorId))
+        }, 3000)
+    }
+
+    const removeError = (errorId) => {
+        const updatedItems = errors.filter(error => error.id !== errorId)
+        setErrors(updatedItems)
     }
 
     useEffect(() => { fetchNotes() }, [])
@@ -55,34 +90,6 @@ function App() {
     useEffect(() => { addError(noteError, 'notes') }, [noteError])
     useEffect(() => { addError(noticeError, 'notices') }, [noticeError])
     useEffect(() => { addError(mutatingNoteError, 'addNote') }, [mutatingNoteError])
-
-    const addError = (textError, where) => {
-        if (!textError) return
-
-        const newError = {
-            id: where + '_' + Math.floor(Date.now()),
-            message: `Error load ${where}: ` + textError
-        }
-
-        setError(errors.length ? [newError, ...errors] : textError ? [newError] : [])
-
-        switch (where) {
-            case 'notes':
-                setNoteError(null)
-                break
-            case 'notices':
-                setNoticeError(null)
-                break
-            case 'addNote':
-                setAddingNoteError(null)
-                break
-        }
-    }
-
-    const removeError = (errorId) => {
-        const updatedItems = errors.filter(error => error.id !== errorId)
-        setError(updatedItems)
-    }
 
     return (
         <div>
