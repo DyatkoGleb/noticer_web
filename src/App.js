@@ -12,6 +12,7 @@ import {useDataMutation} from './hooks/useDataMutation'
 
 
 function App() {
+    const [showAboutProject, setShowAboutProject] = useState(false)
     const [notes, setNotes] = useState([])
     const [notices, setNotices] = useState([])
     const [isLoadAllNotices, setIsLoadAllNotices] = useState(false)
@@ -50,6 +51,14 @@ function App() {
         notes: setNoteError,
         notices: setNoticeError,
         addNote: setAddingNoteError
+    }
+
+    const togglePopup = (event) => {
+        setShowAboutProject(!showAboutProject)
+
+        if (showAboutProject) {
+            event.target.blur()
+        }
     }
 
     const addNewNote = () => {
@@ -93,7 +102,10 @@ function App() {
 
     return (
         <div>
-            <Header />
+            <Header
+                showAboutProject={showAboutProject}
+                togglePopup={togglePopup}
+            />
 
             <ContentWrapper>
                 <NewNoteForm
@@ -118,7 +130,7 @@ function App() {
                 </div>
             </ContentWrapper>
 
-            <ErrorList errors={errors} removeError={removeError}/>
+            <ErrorList errors={errors} showAboutProject={showAboutProject} removeError={removeError}/>
         </div>
     )
 }

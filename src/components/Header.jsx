@@ -31,17 +31,7 @@ const BtnAboutProject = styled.button`
 `
 
 
-const Header = () => {
-    const [showAboutProject, setShowAboutProject] = useState(false)
-
-    const togglePopup = (event) => {
-        setShowAboutProject(!showAboutProject);
-
-        if (showAboutProject) {
-            event.target.blur()
-        }
-    }
-
+const Header = ({ showAboutProject, togglePopup }) => {
     return (
         <div>
             <HeaderBlock>
