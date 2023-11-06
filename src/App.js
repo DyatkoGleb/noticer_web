@@ -4,27 +4,22 @@ import ContentWrapper from './components/UI/ContentWrapper'
 import NewNoteForm from './components/NewNoteForm'
 import './assets/scss/style.scss'
 import NoteService from './api/NoteService'
-import {useFetching} from './hooks/useFetching'
 import ErrorList from './components/ErrorList'
 import NoteListWrapper from './components/NoteListWrapper'
 import NoticeListWrapper from './components/NoticeListWrapper'
 import {useDataMutation} from './hooks/useDataMutation'
 import {useNotesFetching} from './hooks/useNotesFetching'
+import {useNoticesFetching} from './hooks/useNoticesFetching'
 
 
 function App() {
     const [showAboutProject, setShowAboutProject] = useState(false)
-    const [notes, setNotes, isNotesLoading, noteError, setNoteError, fetchNotes] = useNotesFetching();
-    const [notices, setNotices] = useState([])
     const [isLoadAllNotices, setIsLoadAllNotices] = useState(false)
+    const [notes, setNotes, isNotesLoading, noteError, setNoteError, fetchNotes] = useNotesFetching()
+    const [notices, setNotices, isNoticesLoading, noticeError, setNoticeError, fetchNotices] = useNoticesFetching(isLoadAllNotices)
     const [errors, setErrors] = useState([])
     const [inputValue, setInputValue] = useState('')
     const inputRef = useRef(null)
-
-    const [fetchNotices, isNoticesLoading, noticeError, setNoticeError] = useFetching(async () => {
-        const notices = await (isLoadAllNotices ? NoteService.fetchAllNotices() : NoteService.fetchCurrentNotices())
-        setNotices(notices.data.data)
-    })
 
     const [addNote, isNoteMutating, mutatingNoteError, setAddingNoteError] = useDataMutation(async () => {
         const response = await NoteService.addNote(inputValue)
