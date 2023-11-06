@@ -3,40 +3,31 @@ import Header from './components/Header'
 import ContentWrapper from './components/UI/ContentWrapper'
 import NewNoteForm from './components/NewNoteForm'
 import './assets/scss/style.scss'
-import NoteService from './api/NoteService'
 import ErrorList from './components/ErrorList'
 import NoteListWrapper from './components/NoteListWrapper'
 import NoticeListWrapper from './components/NoticeListWrapper'
-import {useDataMutation} from './hooks/useDataMutation'
 import {useNotesFetching} from './hooks/useNotesFetching'
 import {useNoticesFetching} from './hooks/useNoticesFetching'
+import {useAddNote} from './hooks/useAddNote'
 
 
 function App() {
     const [showAboutProject, setShowAboutProject] = useState(false)
     const [isLoadAllNotices, setIsLoadAllNotices] = useState(false)
-    const [notes, setNotes, isNotesLoading, noteError, setNoteError, fetchNotes] = useNotesFetching()
-    const [notices, setNotices, isNoticesLoading, noticeError, setNoticeError, fetchNotices] = useNoticesFetching(isLoadAllNotices)
-    const [errors, setErrors] = useState([])
     const [inputValue, setInputValue] = useState('')
     const inputRef = useRef(null)
-
-    const [addNote, isNoteMutating, mutatingNoteError, setAddingNoteError] = useDataMutation(async () => {
-        const response = await NoteService.addNote(inputValue)
-
-        if (response.data) {
-            setInputValue('')
-            inputRef.current.focus()
-
-            const entity = response.data.data
-
-            if (entity.item_type === 'note') {
-                setNotes([...notes, entity])
-            } else if (entity.item_type === 'notice') {
-                setNotices([...notices, entity])
-            }
-        }
-    })
+    const [errors, setErrors] = useState([])
+    const [notes, setNotes, isNotesLoading, noteError, setNoteError, fetchNotes] = useNotesFetching()
+    const [notices, setNotices, isNoticesLoading, noticeError, setNoticeError, fetchNotices] = useNoticesFetching(isLoadAllNotices)
+    const [addNote, mutatingNoteError, setAddingNoteError] = useAddNote(
+        inputValue,
+        setInputValue,
+        inputRef,
+        notes,
+        setNotes,
+        notices,
+        setNotices
+    )
 
     const errorHandlers = {
         notes: setNoteError,
@@ -50,10 +41,6 @@ function App() {
         if (showAboutProject) {
             event.target.blur()
         }
-    }
-
-    const addNewNote = () => {
-        addNote(inputValue)
     }
 
     const addError = (textError, where) => {
@@ -103,7 +90,7 @@ function App() {
                     inputValue={inputValue}
                     setInputValue={setInputValue}
                     inputRef={inputRef}
-                    addNewNote={addNewNote}
+                    addNewNote={addNote}
                 />
 
                 <div className="row">
