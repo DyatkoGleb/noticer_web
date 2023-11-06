@@ -9,21 +9,17 @@ import ErrorList from './components/ErrorList'
 import NoteListWrapper from './components/NoteListWrapper'
 import NoticeListWrapper from './components/NoticeListWrapper'
 import {useDataMutation} from './hooks/useDataMutation'
+import {useNotesFetching} from './hooks/useNotesFetching'
 
 
 function App() {
     const [showAboutProject, setShowAboutProject] = useState(false)
-    const [notes, setNotes] = useState([])
+    const [notes, setNotes, isNotesLoading, noteError, setNoteError, fetchNotes] = useNotesFetching();
     const [notices, setNotices] = useState([])
     const [isLoadAllNotices, setIsLoadAllNotices] = useState(false)
     const [errors, setErrors] = useState([])
     const [inputValue, setInputValue] = useState('')
     const inputRef = useRef(null)
-
-    const [fetchNotes, isNotesLoading, noteError, setNoteError] = useFetching(async () => {
-        const notes = await NoteService.fetchNotes()
-        setNotes(notes.data.data)
-    })
 
     const [fetchNotices, isNoticesLoading, noticeError, setNoticeError] = useFetching(async () => {
         const notices = await (isLoadAllNotices ? NoteService.fetchAllNotices() : NoteService.fetchCurrentNotices())
