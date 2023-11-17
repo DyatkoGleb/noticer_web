@@ -1,7 +1,7 @@
-import ListLoader from './UI/ListLoader'
+import ListLoader from '../UI/ListLoader'
 import NoticeList from './NoticeList'
-import IconChecked from './UI/IconChecked'
-import IconUnchecked from './UI/IconUnchecked'
+import IconChecked from '../UI/IconChecked'
+import IconUnchecked from '../UI/IconUnchecked'
 import styled from 'styled-components'
 
 

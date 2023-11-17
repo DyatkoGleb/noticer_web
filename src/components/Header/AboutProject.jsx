@@ -1,5 +1,5 @@
-import AccentText from './UI/AccentText'
-import FadedBlock from './UI/FadedBlock'
+import AccentText from '../UI/AccentText'
+import FadedBlock from '../UI/FadedBlock'
 import styled from 'styled-components'
 
 

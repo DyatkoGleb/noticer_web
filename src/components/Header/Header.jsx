@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import ContentWrapper from './UI/ContentWrapper'
+import ContentWrapper from '../UI/ContentWrapper'
 import AboutProject from './AboutProject'
 import styled from 'styled-components'
 

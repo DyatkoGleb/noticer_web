@@ -1,6 +1,6 @@
-import NoteCard from './UI/NoteCard'
+import NoteCard from '../UI/NoteCard'
 import styled from 'styled-components'
-import IconCheckmark from './UI/IconCheckmark'
+import IconCheckmark from '../UI/IconCheckmark'
 
 
 const StyledDiv = styled.div`

@@ -1,5 +1,5 @@
 import NoteList from './NoteList'
-import ListLoader from './UI/ListLoader'
+import ListLoader from '../UI/ListLoader'
 
 const NoteListWrapper = ({ isNotesLoading, notes }) => {
     return (
