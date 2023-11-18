@@ -19,7 +19,7 @@ const NoticeItem = (props) => {
         <NoteCard>
             <StyledDiv>
                 {notice.datetime}
-                {notice.status === 'past' && <IconCheckmark>/</IconCheckmark>}
+                {notice.status === 'past' && <IconCheckmark />}
             </StyledDiv>
             <div>{notice.text}</div>
         </NoteCard>

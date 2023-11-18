@@ -3,8 +3,8 @@ import iconCheckmark from '../../assets/images/icons8-done-100.png'
 
 
 const ImageCheckmark = styled.div`
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     background-image: url(${iconCheckmark});
     background-size: 100%;
     background-repeat: no-repeat;

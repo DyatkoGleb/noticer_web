@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 
 const AboutWrapper = styled.div`
-    position: absolute;
+    position: fixed;
     top: 50px;
     right: -400px;
     max-width: 400px;
