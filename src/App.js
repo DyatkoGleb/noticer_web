@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 import Header from './components/Header/Header'
 import ContentWrapper from './components/UI/ContentWrapper'
-import NewNoteForm from './components/NewNoteForm'
+import NewNoteForm from './components/NoteCreateForm/NewNoteForm'
 import './assets/scss/style.scss'
 import ErrorList from './components/Error/ErrorList'
 import NoteListWrapper from './components/Note/NoteListWrapper'
@@ -15,6 +15,7 @@ function App() {
     const [showAboutProject, setShowAboutProject] = useState(false)
     const [isLoadAllNotices, setIsLoadAllNotices] = useState(false)
     const [inputValue, setInputValue] = useState('')
+    const [typeNewNote, setTypeNewNote] = useState('')
     const inputRef = useRef(null)
     const [errors, setErrors] = useState([])
     const [notes, setNotes, isNotesLoading, noteError, setNoteError, fetchNotes] = useNotesFetching()
@@ -22,6 +23,8 @@ function App() {
     const [addNote, mutatingNoteError, setAddingNoteError] = useAddNote(
         inputValue,
         setInputValue,
+        typeNewNote,
+        setTypeNewNote,
         inputRef,
         notes,
         setNotes,
@@ -91,6 +94,8 @@ function App() {
                     setInputValue={setInputValue}
                     inputRef={inputRef}
                     addNewNote={addNote}
+                    typeNewNote={typeNewNote}
+                    setTypeNewNote={setTypeNewNote}
                 />
 
                 <div className="row">

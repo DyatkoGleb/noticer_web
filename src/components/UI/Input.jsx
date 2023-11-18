@@ -23,7 +23,6 @@ const Input = React.forwardRef((props, ref) => {
         <StyledInput
             type="text"
             placeholder="24.01.2023 11:11 Text.."
-            autoFocus
             ref={ref}
             {...props}
         />
