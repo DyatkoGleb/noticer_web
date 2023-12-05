@@ -12,7 +12,7 @@ const NewNoteForm = ({ inputValue, setInputValue, inputRef, addNewNote, typeNewN
 	}
 
 	return (
-		<div className="d-flex justify-content-center align-items-center" id="form">
+		<div className="d-flex justify-content-center align-items-start" id="form">
 			<NoteTypeSelector
 				typeNewNote={typeNewNote}
 				setTypeNewNote={setTypeNewNote}
@@ -20,7 +20,7 @@ const NewNoteForm = ({ inputValue, setInputValue, inputRef, addNewNote, typeNewN
 			/>
 			<Input
 				value={inputValue}
-				onChange={e => setInputValue(e.target.value)}
+				onInput={e => setInputValue(e.target.textContent)}
 				ref={inputRef}
 			/>
 			<Button onClick={addNewNote}>
