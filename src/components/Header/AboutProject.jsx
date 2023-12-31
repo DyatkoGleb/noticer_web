@@ -100,12 +100,12 @@ const AboutProject = ({ show }) => {
                     <AccentText>
                         NoticerBot
                     </AccentText>
-                    &nbsp;- телеграм бот, принимающий данные для заметок, тудушек, напоминашек и напоминалок их в NoticerApi.
+                    &nbsp;- телеграм бот, принимающий данные для заметок, тудушек, напоминашек и отправляющий их в NoticerApi.
                     Так же отправляет сообщения из NoticerQueue.
                 </p>
                 <ProjectToolbox href="https://github.com/DyatkoGleb/noticer_bot" target="_blank" tabIndex="-1">
                     <GithubIcon></GithubIcon>
-                    <FadedBlock>Python, Pyrogram</FadedBlock>
+                    <FadedBlock>Nodejs, express</FadedBlock>
                 </ProjectToolbox>
             </AboutServiceBlock>
 
