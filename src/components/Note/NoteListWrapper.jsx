@@ -1,7 +1,7 @@
 import NoteList from './NoteList'
 import ListLoader from '../UI/ListLoader'
 
-const NoteListWrapper = ({ isNotesLoading, notes }) => {
+const NoteListWrapper = ({ isNotesLoading, notes, deleteNote }) => {
     return (
         <div>
             <div className="row">
@@ -10,7 +10,7 @@ const NoteListWrapper = ({ isNotesLoading, notes }) => {
 
             {isNotesLoading
                 ? <ListLoader/>
-                : <NoteList notes={notes} />
+                : <NoteList notes={notes} deleteNote={deleteNote}/>
             }
         </div>
     )

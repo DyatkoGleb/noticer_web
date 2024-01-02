@@ -7,9 +7,12 @@ export default class NoteService
         'Access-Control-Allow-Origin': '*'
     }
 
-
     static addNote = async (message, itemType) => {
         return await axios.post('http://localhost:8008/addNewNote', { message, itemType }, { headers: this.headers })
+    }
+
+    static deleteNote = async (id) => {
+        return await axios.post('http://localhost:8008/deleteNote', { id }, { headers: this.headers })
     }
 
     static fetchNotes = async () => {

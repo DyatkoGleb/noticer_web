@@ -9,6 +9,7 @@ import NoticeListWrapper from './components/Notice/NoticeListWrapper'
 import {useNotesFetching} from './hooks/useNotesFetching'
 import {useNoticesFetching} from './hooks/useNoticesFetching'
 import {useAddNote} from './hooks/useAddNote'
+import {useDeleteNote} from './hooks/useDeleteNote'
 
 
 function App() {
@@ -20,7 +21,9 @@ function App() {
     const [errors, setErrors] = useState([])
     const [notes, setNotes, isNotesLoading, noteError, setNoteError, fetchNotes] = useNotesFetching()
     const [notices, setNotices, isNoticesLoading, noticeError, setNoticeError, fetchNotices] = useNoticesFetching(isLoadAllNotices)
-    const [addNote, mutatingNoteError, setAddingNoteError] = useAddNote(
+    const [noteIdForDeleting, setNoteIdForDeleting] = useState(null)
+    const [deleteNoteHook, isNoteDeleting, deletingNoteError, setDeletingNoteError] = useDeleteNote(noteIdForDeleting)
+    const [addNote, addingNoteError, setAddingNoteError] = useAddNote(
         inputValue,
         setInputValue,
         typeNewNote,
@@ -32,10 +35,29 @@ function App() {
         setNotices
     )
 
+    const deleteNote = (noteId) => {
+        setNoteIdForDeleting(noteId + 100)
+    }
+
+    useEffect(() => {
+        if (noteIdForDeleting !== null) {
+            deleteNoteHook()
+
+            if (!deletingNoteError) {
+                setNotes(
+                    [...notes].filter(note => note.id !== noteIdForDeleting)
+                )
+            }
+
+            setNoteIdForDeleting(null)
+        }
+    }, [noteIdForDeleting, deleteNoteHook, deletingNoteError, setNotes])
+
     const errorHandlers = {
         notes: setNoteError,
         notices: setNoticeError,
-        addNote: setAddingNoteError
+        addNote: setAddingNoteError,
+        deleteNote: setDeletingNoteError
     }
 
     const togglePopup = (event) => {
@@ -51,7 +73,7 @@ function App() {
 
         const newError = {
             id: where + '_' + Date.now().toString(36) + Math.random().toString(36),
-            message: `Error load ${where}: ${textError}`
+            message: `Error with ${where}: ${textError}`
         }
 
         setErrors(prevErrors => [newError, ...prevErrors])
@@ -67,7 +89,7 @@ function App() {
     const removeErrorWithDelay = (errorId) => {
         setTimeout(() => {
             setErrors(prevErrors => prevErrors.filter(error => error.id !== errorId))
-        }, 3000)
+        }, 5000)
     }
 
     const removeError = (errorId) => {
@@ -77,9 +99,10 @@ function App() {
 
     useEffect(() => { fetchNotes() }, [])
     useEffect(() => { fetchNotices() }, [isLoadAllNotices])
-    useEffect(() => { addError(noteError, 'notes') }, [noteError])
-    useEffect(() => { addError(noticeError, 'notices') }, [noticeError])
-    useEffect(() => { addError(mutatingNoteError, 'addNote') }, [mutatingNoteError])
+    useEffect(() => { addError(noteError, 'load notes') }, [noteError])
+    useEffect(() => { addError(noticeError, 'load notices') }, [noticeError])
+    useEffect(() => { addError(addingNoteError, 'addNote') }, [addingNoteError])
+    useEffect(() => { addError(deletingNoteError, 'deleteNote') }, [deletingNoteError])
 
     return (
         <div>
@@ -100,7 +123,11 @@ function App() {
 
                 <div className="row">
                     <div className="col-12 col-md-6">
-                        <NoteListWrapper isNotesLoading={isNotesLoading} notes={notes} />
+                        <NoteListWrapper
+                            isNotesLoading={isNotesLoading}
+                            notes={notes}
+                            deleteNote={deleteNote}
+                        />
                     </div>
                     <div className="col-12 col-md-6">
                         <NoticeListWrapper
