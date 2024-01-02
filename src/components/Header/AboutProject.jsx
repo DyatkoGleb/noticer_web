@@ -16,6 +16,7 @@ const AboutWrapper = styled.div`
     user-select: none;
     overflow: auto;
     transition: .3s;
+    z-index: 2;
 `
 const AboutServiceBlock = styled.div`
   margin-bottom: 20px;
