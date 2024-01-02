@@ -36,7 +36,7 @@ function App() {
     )
 
     const deleteNote = (noteId) => {
-        setNoteIdForDeleting(noteId + 100)
+        setNoteIdForDeleting(noteId)
     }
 
     useEffect(() => {
