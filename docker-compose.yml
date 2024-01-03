@@ -1,6 +1,14 @@
 version: '3'
 services:
   web:
+    container_name: nw_react
+    restart: always
     build: .
     ports:
       - "3000:3000"
+    networks:
+      - noticer
+
+networks:
+  noticer:
+    external: true
