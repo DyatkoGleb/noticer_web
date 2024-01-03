@@ -8,22 +8,22 @@ export default class NoteService
     }
 
     static addNote = async (message, itemType) => {
-        return await axios.post('http://localhost:8008/addNewNote', { message, itemType }, { headers: this.headers })
+        return await axios.post(process.env.REACT_APP_NOTICER_API_URL + '/addNewNote', { message, itemType }, { headers: this.headers })
     }
 
     static deleteNote = async (id) => {
-        return await axios.post('http://localhost:8008/deleteNote', { id }, { headers: this.headers })
+        return await axios.post(process.env.REACT_APP_NOTICER_API_URL + '/deleteNote', { id }, { headers: this.headers })
     }
 
     static fetchNotes = async () => {
-        return await axios.get('http://localhost:8008/getNotes', { headers: this.headers })
+        return await axios.get(process.env.REACT_APP_NOTICER_API_URL + '/getNotes', { headers: this.headers })
     }
 
     static fetchAllNotices = async () => {
-        return await axios.get('http://localhost:8008/getAllNotices', { headers: this.headers })
+        return await axios.get(process.env.REACT_APP_NOTICER_API_URL + '/getAllNotices', { headers: this.headers })
     }
 
     static fetchCurrentNotices = async () => {
-        return await axios.get('http://localhost:8008/getCurrentNotices', { headers: this.headers })
+        return await axios.get(process.env.REACT_APP_NOTICER_API_URL + '/getCurrentNotices', { headers: this.headers })
     }
 }

@@ -54,10 +54,10 @@ function App() {
     }, [noteIdForDeleting, deleteNoteHook, deletingNoteError, setNotes])
 
     const errorHandlers = {
-        notes: setNoteError,
-        notices: setNoticeError,
-        addNote: setAddingNoteError,
-        deleteNote: setDeletingNoteError
+        'load notes': setNoteError,
+        'load notices': setNoticeError,
+        'addNote': setAddingNoteError,
+        'deleteNote': setDeletingNoteError
     }
 
     const togglePopup = (event) => {
