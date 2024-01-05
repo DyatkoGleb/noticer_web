@@ -10,6 +10,7 @@ import {useNotesFetching} from './hooks/useNotesFetching'
 import {useNoticesFetching} from './hooks/useNoticesFetching'
 import {useAddNote} from './hooks/useAddNote'
 import {useDeleteNote} from './hooks/useDeleteNote'
+import {useDeleteNotice} from './hooks/useDeleteNotice'
 
 
 function App() {
@@ -22,7 +23,9 @@ function App() {
     const [notes, setNotes, isNotesLoading, noteError, setNoteError, fetchNotes] = useNotesFetching()
     const [notices, setNotices, isNoticesLoading, noticeError, setNoticeError, fetchNotices] = useNoticesFetching(isLoadAllNotices)
     const [noteIdForDeleting, setNoteIdForDeleting] = useState(null)
+    const [noticeIdForDeleting, setNoticeIdForDeleting] = useState(null)
     const [deleteNoteHook, isNoteDeleting, deletingNoteError, setDeletingNoteError] = useDeleteNote(noteIdForDeleting)
+    const [deleteNoticeHook, isNoticeDeleting, deletingNoticeError, setDeletingNoticeError] = useDeleteNotice(noticeIdForDeleting)
     const [addNote, addingNoteError, setAddingNoteError] = useAddNote(
         inputValue,
         setInputValue,
@@ -53,11 +56,31 @@ function App() {
         }
     }, [noteIdForDeleting, deleteNoteHook, deletingNoteError, setNotes])
 
+    const deleteNotice = (noticeId) => {
+        setNoticeIdForDeleting(noticeId)
+    }
+
+    useEffect(() => {
+        if (noticeIdForDeleting !== null) {
+            deleteNoticeHook()
+
+            if (!deletingNoticeError) {
+                setNotices(
+                    [...notices].filter(notice => notice.id !== noticeIdForDeleting)
+                )
+            }
+
+            setNoticeIdForDeleting(null)
+        }
+    }, [noticeIdForDeleting, deleteNoticeHook, deletingNoticeError, setNotices])
+
+
     const errorHandlers = {
         'load notes': setNoteError,
         'load notices': setNoticeError,
         'addNote': setAddingNoteError,
-        'deleteNote': setDeletingNoteError
+        'deleteNote': setDeletingNoteError,
+        'deleteNotice': setDeletingNoticeError
     }
 
     const togglePopup = (event) => {
@@ -103,6 +126,7 @@ function App() {
     useEffect(() => { addError(noticeError, 'load notices') }, [noticeError])
     useEffect(() => { addError(addingNoteError, 'addNote') }, [addingNoteError])
     useEffect(() => { addError(deletingNoteError, 'deleteNote') }, [deletingNoteError])
+    useEffect(() => { addError(deletingNoticeError, 'deleteNotice') }, [setDeletingNoticeError])
 
     return (
         <div>
@@ -135,6 +159,7 @@ function App() {
                             notices={notices}
                             isLoadAllNotices={isLoadAllNotices}
                             setIsLoadAllNotices={setIsLoadAllNotices}
+                            deleteNotice={deleteNotice}
                         />
                     </div>
                 </div>

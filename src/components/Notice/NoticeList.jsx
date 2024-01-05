@@ -1,6 +1,6 @@
 import NoticeItem from './NoticeItem'
 
-const NoticeList = ({notices}) => {
+const NoticeList = ({notices, deleteNotice}) => {
     if (!notices.length) {
         return (
             <div>No notes available</div>
@@ -10,7 +10,7 @@ const NoticeList = ({notices}) => {
     return (
         <div>
             {notices.map(notice => (
-                <NoticeItem key={notice.id} data={notice} />
+                <NoticeItem key={notice.id} data={notice} deleteNotice={deleteNotice}/>
             ))}
         </div>
     )

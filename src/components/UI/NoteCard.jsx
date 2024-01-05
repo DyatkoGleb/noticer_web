@@ -27,7 +27,7 @@ const BtnNoteRemoving = styled.div`
 `
 
 
-const NoteCard = ({ deleteNote, noteId, children }) => {
+const NoteCard = ({ deleteEntity, entityId, children }) => {
     const [isHovered, setHovered] = useState(false)
     const removingStyle = { boxShadow: '0 0 8px #592222'}
 
@@ -36,7 +36,7 @@ const NoteCard = ({ deleteNote, noteId, children }) => {
             <BtnNoteRemoving
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
-                onClick={() => deleteNote(noteId)}
+                onClick={() => deleteEntity(entityId)}
             />
             {children}
         </StyledDiv>

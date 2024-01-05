@@ -15,6 +15,10 @@ export default class NoteService
         return await axios.post(process.env.REACT_APP_NOTICER_API_URL + '/deleteNote', { id }, { headers: this.headers })
     }
 
+    static deleteNotice = async (id) => {
+        return await axios.post(process.env.REACT_APP_NOTICER_API_URL + '/deleteNotice', { id }, { headers: this.headers })
+    }
+
     static fetchNotes = async () => {
         return await axios.get(process.env.REACT_APP_NOTICER_API_URL + '/getNotes', { headers: this.headers })
     }

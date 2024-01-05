@@ -12,11 +12,11 @@ const StyledDiv = styled.div`
 `
 
 
-const NoticeItem = (props) => {
+const NoticeItem = ({ deleteNotice, ...props }) => {
     const notice = props.data
 
     return (
-        <NoteCard>
+        <NoteCard entityId={notice.id} deleteEntity={deleteNotice}>
             <StyledDiv>
                 {notice.datetime}
                 {notice.status === 'past' && <IconCheckmark />}

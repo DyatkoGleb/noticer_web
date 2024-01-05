@@ -5,7 +5,7 @@ const NoteItem = ({ deleteNote, ...props }) => {
     const note = props.data
 
     return (
-        <NoteCard noteId={note.id} deleteNote={deleteNote}>
+        <NoteCard entityId={note.id} deleteEntity={deleteNote}>
             <div>{note.text}</div>
         </NoteCard>
     )

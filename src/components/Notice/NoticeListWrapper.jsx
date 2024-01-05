@@ -13,7 +13,7 @@ const NoticeSwitcher = styled.div`
 `
 
 
-const NoteListWrapper = ({ isNoticesLoading, notices, isLoadAllNotices, setIsLoadAllNotices}) => {
+const NoteListWrapper = ({ isNoticesLoading, notices, isLoadAllNotices, setIsLoadAllNotices, deleteNotice }) => {
     const handleLoadButtonClick = () => {
         setIsLoadAllNotices(!isLoadAllNotices)
     }
@@ -36,8 +36,7 @@ const NoteListWrapper = ({ isNoticesLoading, notices, isLoadAllNotices, setIsLoa
                 ? <ListLoader/>
                 : <NoticeList
                     notices={notices}
-                    isLoadAllNotices={isLoadAllNotices}
-                    setIsLoadAllNotices={setIsLoadAllNotices}
+                    deleteNotice={deleteNotice}
                 />
             }
         </div>
