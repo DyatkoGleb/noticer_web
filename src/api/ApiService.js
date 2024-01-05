@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default class NoteService
+export default class ApiService
 {
     headers = {
         'Content-Type': 'application/json',

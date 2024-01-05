@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { useFetching } from './useFetching'
-import NoteService from '../api/NoteService'
+import ApiService from '../api/ApiService'
 
 export const useNoticesFetching = (isLoadAllNotices) => {
     const [notices, setNotices] = useState([])
 
     const [fetchNotices, isNoticesLoading, noticeError, setNoticeError] = useFetching(async () => {
-        const notices = await (isLoadAllNotices ? NoteService.fetchAllNotices() : NoteService.fetchCurrentNotices())
+        const notices = await (isLoadAllNotices ? ApiService.fetchAllNotices() : ApiService.fetchCurrentNotices())
         setNotices(notices.data.data)
     })
 

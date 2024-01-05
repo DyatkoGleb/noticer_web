@@ -1,5 +1,5 @@
-import NoteService from '../api/NoteService'
-import {useDataMutation} from "./useDataMutation";
+import ApiService from '../api/ApiService'
+import { useDataMutation } from "./useDataMutation";
 
 
 export const useAddNote = (
@@ -14,7 +14,7 @@ export const useAddNote = (
     setNotices
 ) => {
     const [addNote, isNoteMutating, mutatingNoteError, setAddingNoteError] = useDataMutation(async () => {
-        const response = await NoteService.addNote(inputValue, typeNewNote)
+        const response = await ApiService.addNote(inputValue, typeNewNote)
         if (response.data) {
             setInputValue('')
             setTypeNewNote('')
